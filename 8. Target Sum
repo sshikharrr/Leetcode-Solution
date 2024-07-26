@@ -1,0 +1,42 @@
+// Top down
+class Solution {
+public:
+    int help(vector<int>& nums, int target,int sum,int i){
+        if(i==nums.size()){
+         if(sum==target){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+        }
+
+        return help(nums,target,sum+nums[i],i+1) +help(nums,target,sum-nums[i],i+1); 
+    }
+    int findTargetSumWays(vector<int>& nums, int target) {
+        return help(nums,target,0,0);
+    }
+    
+};
+
+// Bottom Up
+
+class Solution {
+public:
+    int help(vector<int>& nums, int target,int i){
+        if(i==nums.size()){
+         if(0==target){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+        }
+
+        return help(nums,target+nums[i],i+1)+help(nums,target-nums[i],i+1); 
+    }
+    int findTargetSumWays(vector<int>& nums, int target) {
+        return help(nums,target,0);
+    }
+    
+};

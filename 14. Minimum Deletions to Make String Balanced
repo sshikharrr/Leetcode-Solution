@@ -1,0 +1,59 @@
+// Using stack
+
+class Solution {
+public:
+    int minimumDeletions(string s) {
+        stack<int>st;
+        int i=0,ans=0;
+        while(i<s.length()){
+            while(!st.empty() && (s[i]=='a' && st.top()=='b') && i<s.length()){
+                st.pop();
+                i++;
+                ans++;
+            }
+            if(i<s.length()){
+                st.push(s[i]);
+            }
+            i++;
+        }
+        return ans;
+    }
+};
+
+// using Counting
+
+class Solution {
+public:
+    int minimumDeletions(string s) {
+        int n=s.length();
+        vector<int>lb(n,0),ra(n,0);
+        for(int i=0;i<n;i++){
+            if(s[i]=='b'){
+                if(i>0){
+                    lb[i]=lb[i-1]+1;
+                }
+                else{
+                    lb[i]=1;
+                }
+            }
+            else if(i>0){
+                lb[i]=lb[i-1];
+            }
+            if(s[n-i-1]=='a'){
+                if(i>0){
+                    ra[n-i-1]=ra[n-i]+1;
+                }else{
+                    ra[n-i-1]=1;
+                }
+            }
+            else if(i>0){
+                ra[n-i-1]=ra[n-i];
+            }
+        }
+        int ans=min(ra[0],lb.back());
+        for(int i=1;i<n;i++){
+            ans=min(ans,lb[i-1]+ra[i]);
+        }
+        return ans;
+    }
+};

@@ -1,0 +1,29 @@
+class Solution {
+public:
+int tb;
+int ns;
+    int help(int i,vector<vector<int>>& books,int w,int h,vector<vector<int>>&v){
+        int mh=max(h,books[i][1]);
+        if(i==tb-1){
+            if(books[i][0]<=w){
+                return mh;
+            }
+            return h+books[i][1];
+        }
+        if(v[i][w]!=0){
+            return v[i][w];
+        }
+        int s=INT_MAX;
+        if(books[i][0]<=w){
+            s=help(i+1,books,w-books[i][0],mh,v);
+        }
+        int d=h+help(i+1,books,ns-books[i][0],books[i][1],v);
+        return v[i][w]=min(s,d);
+    } 
+    int minHeightShelves(vector<vector<int>>& books, int shelfWidth) {
+        tb=books.size();
+        ns=shelfWidth;
+        vector<vector<int>>v(tb,vector<int>(ns+1));
+        return help(0,books,shelfWidth,0,v);
+    }
+};

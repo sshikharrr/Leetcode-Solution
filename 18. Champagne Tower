@@ -1,0 +1,22 @@
+// Simulation
+
+class Solution {
+public:
+    double champagneTower(int poured, int r, int g) {
+      
+           vector<double>a(1,poured);
+      
+        for(int i=0;i<r;i++){
+            vector<double>next(a.size()+1,0.0);
+            for(int  j=0;j<a.size();j++){
+                 double o=max(0.0,a[j]-1);
+               
+                next[j]+=o/2.0;
+                next[j+1]+=o/2.0;
+            }
+            a=next;
+        }
+        return std::min(1.0,a[g]);
+
+    }
+};

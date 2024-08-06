@@ -1,0 +1,21 @@
+
+class Solution {
+public:
+    int minimumPushes(string word) {
+        unordered_map<char,int>m;
+        int ans=0,n=1,s=1;
+        priority_queue<int>p;
+        for(auto i:word){
+            m[i]++;
+        }
+        for(auto i:m){
+            p.push(i.second);
+        }
+        while(!p.empty()){
+            ans+=(n%8==0?s++:s)*p.top();
+            n++;
+            p.pop();
+        }
+        return ans;
+    }
+};

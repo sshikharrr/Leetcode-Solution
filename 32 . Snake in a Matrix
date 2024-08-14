@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int finalPositionOfSnake(int n, vector<string>& commands) {
+        vector<vector<int>>v(n,vector<int>(n));
+        int c=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                v[i][j]=c;
+                c++;
+            }
+        }
+        int i=0,j=0;
+        for(auto it:commands)
+        {
+            if(it=="RIGHT"){
+                j++;
+            }
+            else if(it=="LEFT"){
+                j--;
+            }
+            else if(it=="UP"){
+                i--;
+            }
+            else if(it=="DOWN"){
+                i++;
+            }
+        }
+        return v[i][j];
+    }
+};

@@ -8,7 +8,7 @@ public:
                     ans += (n/i);
                     n = i;
                     break;
-                }
+                } 
             }
         }
         return ans;

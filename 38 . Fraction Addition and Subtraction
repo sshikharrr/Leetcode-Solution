@@ -1,0 +1,37 @@
+class Solution {
+public:
+    string fractionAddition(string e) {
+        int a=0,b=1;
+        int i=0,n=e.size();
+        while(i<n){
+            int f=1;
+            if(e[i]=='+' || e[i]=='-'){
+                if(e[i]=='-'){
+                    f=-1;
+                }
+                i++;
+            }
+            int num=0;
+            while(i<n && isdigit(e[i])){
+                num=num*10+(e[i]-'0');
+                i++;
+            }
+            num*=f;
+            i++;
+            int den=0;
+            while(i<n && isdigit(e[i])){
+                den=den*10 +(e[i]-'0');
+                i++;
+
+            }
+            a=a*den+num*b;
+            b*=den;
+            int val=gcd(abs(a),b);
+            a/=val;
+            b/=val;
+        }
+        return to_string(a)+"/"+to_string(b);
+        
+
+    }
+};

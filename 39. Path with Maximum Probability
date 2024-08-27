@@ -1,0 +1,25 @@
+class Solution {
+public:
+    double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end) {
+         vector<double> dp(n, 0.0);
+    dp[start] = 1.0;
+    bool updated;
+    do {
+        updated = false;
+        for (int j = 0; j < edges.size(); ++j) {
+            int u = edges[j][0];
+            int v = edges[j][1];
+            double p = succProb[j];
+             if (dp[u] * p > dp[v]) {
+                dp[v] = dp[u] * p;
+                updated = true;
+            }
+            if (dp[v] * p > dp[u]) {
+                dp[u] = dp[v] * p;
+                updated = true;
+            }
+        }
+    } while (updated);
+    return dp[end];
+    }
+};

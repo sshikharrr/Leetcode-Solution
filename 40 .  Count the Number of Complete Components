@@ -1,0 +1,36 @@
+class Solution {
+public:
+    void help(int i,unordered_map<int,vector<int>>&m,vector<int>&v,int &a,int &b){
+        if(v[i]){
+            return ;
+        }
+        a++;
+        v[i]=1;
+         b+=m[i].size();
+        for(auto j:m[i]){
+            help(j,m,v,a,b);
+        }
+    }
+    int countCompleteComponents(int n, vector<vector<int>>& edges) {
+        unordered_map<int,vector<int>>m;
+        for(auto i:edges){
+            int u=i[0];
+            int v=i[1];
+            m[u].push_back(v);
+            m[v].push_back(u);
+        }
+        vector<int>v(n);
+        int ans=0;
+        for(int i=0;i<n;i++){
+            if(!v[i]){
+                int a=0,b=0;
+                help(i,m,v,a,b);
+                if(a*(a-1)==b){
+                    ans++;
+                }
+            }
+
+        }
+        return ans;
+    }
+};

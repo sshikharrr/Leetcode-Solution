@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int>help(int s,int n){
+    if(s<n || s>6*n){
+        return {};
+    }
+    vector<int>ans(n,1);
+    int k=s-n;
+    for(int i=0;i<n && k>0;i++){
+        int t=min(k,5);
+        ans[i]+=t;
+        k-=t;
+    }
+    return ans;
+}
+    
+    vector<int> missingRolls(vector<int>& rolls, int mean, int n) {
+       int s=0;
+       int m=rolls.size();
+       for(auto i: rolls){
+        s+=i;
+       } 
+       int k=mean*(n+m);
+        s=k-s;
+        return help(s,n);
+
+    }
+};
